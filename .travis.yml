@@ -11,12 +11,12 @@ after_script:
 - npm install coveralls && coveralls < coverage/lcov.txt
 deploy:
   provider: npm
+  skip_cleanup: true
   email: admin@arxstudios.net
   on:
     branch: master
     tags: true
   api_key:
     secure: CDrypRZ0eJZq/Hx7A8ZO06AA0J1P4X+NrsWbslL8Mpn9zH7GJDWCg5S3nQ3ewDNmYKluvTBTIez6atiKplUzW/PpCqMPjJGHbB1WdPXRHN55NdFMer/DZJpTJRgtX0sezHh81MlLcb9IwMbZcDvCHz6PCe1r5oUBlSuoamAiHSHLld2xJAWNv4+3jCmOx/UGrzuCa+xv8hJYx0KqrEkYsAYJJj6aoVK0sYLh4vjUU+VjF2cR4RucLKPs1c59LS++QGmVavxHybg4kGKWIJGMPYLGnZwz3G6bFuE4Z7YyIkE58FEVMELbswPr7lcKAcd5iPxP2ya0NVZK2m5A6RAOQvR3JBH33CrX7IwYUNhBZgmwV3hUs4JbWP3sCDm3ud2NrpyfHrFmzg3K/mI7OdJ51r8X1sX3uncBnVDVuG/I73F46l/gPCkQH6SD5hV/MuyyDQxUgJpNZ+lEAlHhDjsCwA4VIQXjwzgMN088V3wVeP3pGJshPzwCfcdTvUeI0uM6b+t5ufV8nXyEGajim3okWo3epZHLlEGIOR+SbuWX/eJVt3KxqkfFJu+FJWM5mLgapODX/ipdn2YS6yLkLXRTSajKvn7fTwp5eGJoAOHNITwpyrSUPCbk1aCzbe8BRmKZ3PxiXF4WH8ReRCDMk6sJbgpzsl6QfcYxImsXw06D59o=
-  skip_cleanup: true
 notifications:
   email: false
