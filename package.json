@@ -14,7 +14,7 @@
     "http"
   ],
   "scripts": {
-    "postinstall": "webpack -p",
+    "pretest": "webpack -p",
     "test": "karma start --single-run=true"
   },
   "author": "Arx Studios <nickwoodwrd@gmail.com>",
