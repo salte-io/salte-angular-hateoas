@@ -17,7 +17,7 @@ $ npm install arx-angular-hateoas
 ## Usage
 Enabling HATEOAS support is as simple as adding a dependency on `arx-angular-hateoas` to your application and pushing an interceptor.
 
-_**NOTE:** This will_ **ONLY** _convert objects that return with the,_ **"application/hal+json"**_, Content-Type_
+**NOTE: This will ONLY convert objects that return with the, "application/hal+json", Content-Type**
 ```javascript
 var app = angular.module('app', ['arx-angular-hateoas']);
 
