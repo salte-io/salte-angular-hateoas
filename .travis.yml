@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+- stable
+- iojs
+cache:
+  directories:
+    - node_modules
+after_script:
+  - npm install coveralls && coveralls < coverage/lcov.info
+deploy:
+  provider: npm
+  email: admin@arxstudios.net
+  on:
+    branch: master
+    tags: true
+notifications:
+  email: false
