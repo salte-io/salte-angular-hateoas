@@ -28,29 +28,6 @@ app.config(function($httpProvider) {
 ```
 
 ## API
-### `$link([key])`
-
-Returns a promise which resolves to a link.
-- **`key`:** refers to the link key.
-
-```javascript
-$http.get('/api/some-hateoas-endpoint').then(function(data) {
-    data.$link('self').then(function(self) {
-        // This will return the resulting href of the self link.
-    });
-});
-```
-### `$embedded([key])`
-- **`key`:** refers to the embedded key.
-
-Returns a promise which resolves to an embedded object.
-```javascript
-$http.get('/api/some-hateoas-endpoint').then(function(data) {
-    data.$embedded('list').then(function(list) {
-        // This will return the resulting embedded object with the key list.
-    });
-});
-```
 ### `$get([key] [, options])`
 - **`key`:** refers to the link key.
 - **`options`:** identical to [$http's options][$http-options].
@@ -108,6 +85,29 @@ Returns a $http DELETE request for the designated link
 $http.get('/api/some-hateoas-endpoint').then(function(data) {
     data.$delete('self', { data: data }).then(function(self) {
         // This will send a DELETE to the self link with a request body containing the data object.
+    });
+});
+```
+### `$embedded([key])`
+- **`key`:** refers to the embedded key.
+
+Returns a promise which resolves to an embedded object.
+```javascript
+$http.get('/api/some-hateoas-endpoint').then(function(data) {
+    data.$embedded('list').then(function(list) {
+        // This will return the resulting embedded object with the key list.
+    });
+});
+```
+### `$link([key])`
+
+Returns a promise which resolves to a link.
+- **`key`:** refers to the link key.
+
+```javascript
+$http.get('/api/some-hateoas-endpoint').then(function(data) {
+    data.$link('self').then(function(self) {
+        // This will return the resulting href of the self link.
     });
 });
 ```
