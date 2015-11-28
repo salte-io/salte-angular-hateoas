@@ -1,0 +1,10 @@
+node_modules/
+coverage/
+test/
+*.log
+.babelrc
+.editorconfig
+.eslintrc
+.travis.yml
+karma.conf.js
+webpack.config.js
