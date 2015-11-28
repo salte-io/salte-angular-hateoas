@@ -1,6 +1,6 @@
 {
   "name": "arx-angular-hateoas",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The simple way to consume HATEOAS enabled REST APIs with AngularJS",
   "main": "dist/arx-angular-hateoas.js",
   "repository": {
