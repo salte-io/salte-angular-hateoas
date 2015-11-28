@@ -5,6 +5,8 @@ node_js:
 cache:
   directories:
   - node_modules
+script:
+- webpack -p
 after_script:
 - npm install coveralls && coveralls < coverage/lcov.txt
 deploy:
