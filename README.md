@@ -4,7 +4,6 @@
 [![Travis][travis-ci-image]][travis-ci-url]
 [![Coveralls][coveralls-image]][coveralls-url]
 
-[![David Dependencies][david-dependencies-image]][david-dependencies-url]
 [![David Dependencies][david-dev-dependencies-image]][david-dev-dependencies-url]
 
 The simple way to consume HATEOAS enabled REST APIs with AngularJS
@@ -18,7 +17,7 @@ $ npm install arx-angular-hateoas
 ## Usage
 Enabling HATEOAS support is as simple as adding a dependency on `arx-angular-hateoas` to your application and pushing an interceptor.
 
-_**NOTE:** This will **ONLY** convert objects that return with the, **"application/hal+json"**, Content-Type_
+_**NOTE:** This will_ **ONLY** _convert objects that return with the,_ **"application/hal+json"**_, Content-Type_
 ```javascript
 var app = angular.module('app', ['arx-angular-hateoas']);
 
@@ -147,13 +146,7 @@ app.config(function($hateoasConfigProvider) {
 [coveralls-image]: https://img.shields.io/coveralls/arxstudios/arx-angular-hateoas/master.svg
 [coveralls-url]: https://coveralls.io/github/arxstudios/arx-angular-hateoas
 
-[code-climate-gpa-image]: https://img.shields.io/codeclimate/github/arxstudios/arx-angular-hateoas.svg
-[code-climate-coverage-image]: https://img.shields.io/codeclimate/coverage/github/arxstudios/arx-angular-hateoas.svg
-[code-climate-url]: https://codeclimate.com/github/arxstudios/arx-angular-hateoas
-
-[david-dependencies-image]: https://img.shields.io/david/arxstudios/arx-angular-hateoas.svg
 [david-dev-dependencies-image]: https://img.shields.io/david/dev/arxstudios/arx-angular-hateoas.svg
-[david-dependencies-url]: https://david-dm.org/arxstudios/arx-angular-hateoas
 [david-dev-dependencies-url]: https://david-dm.org/arxstudios/arx-angular-hateoas#info=devDependencies
 
 <!-- References -->

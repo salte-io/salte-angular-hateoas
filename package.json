@@ -3,6 +3,16 @@
   "version": "1.0.0",
   "description": "The simple way to consume HATEOAS enabled REST APIs with AngularJS",
   "main": "dist/arx-angular-hateoas.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arxstudios/arx-angular-hateoas.git"
+  },
+  "keywords": [
+    "angular",
+    "hypermedia",
+    "hateoas",
+    "http"
+  ],
   "scripts": {
     "postinstall": "webpack -p",
     "test": "karma start --single-run=true"
