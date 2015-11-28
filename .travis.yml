@@ -6,7 +6,7 @@ cache:
   directories:
   - node_modules
 after_script:
-- npm install coveralls && coveralls < coverage/lcov.info
+- npm install coveralls && coveralls < coverage/lcov.txt
 deploy:
   provider: npm
   email: admin@arxstudios.net
