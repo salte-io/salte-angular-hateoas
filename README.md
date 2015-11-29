@@ -149,6 +149,5 @@ app.config(function($hateoasConfigProvider) {
 [david-dev-dependencies-image]: https://img.shields.io/david/dev/arxstudios/arx-angular-hateoas.svg
 [david-dev-dependencies-url]: https://david-dm.org/arxstudios/arx-angular-hateoas#info=devDependencies
 
-<!-- References -->
 [hateoas]: https://spring.io/understanding/HATEOAS
-[http-options]: https://docs.angularjs.org/api/ng/service/$http#usage
+[http-options]: https://docs.angularjs.org/api/ng/service/$http
