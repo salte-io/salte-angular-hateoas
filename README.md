@@ -30,7 +30,7 @@ app.config(function($httpProvider) {
 ## API
 ### `$get([key] [, options])`
 - **`key`:** refers to the link key.
-- **`options`:** identical to [$http's options][http-options].
+- **`options`:** identical to [http's options][http-options].
 
 Returns a $http GET request for the designated link
 ```javascript
@@ -42,7 +42,7 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
 ```
 ### `$post([key] [, options])`
 - **`key`:** refers to the link key.
-- **`options`:** identical to [$http's options][http-options].
+- **`options`:** identical to [http's options][http-options].
 
 Returns a $http POST request for the designated link
 ```javascript
@@ -54,7 +54,7 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
 ```
 ### `$put([key] [, options])`
 - **`key`:** refers to the link key.
-- **`options`:** identical to [$http's options][http-options].
+- **`options`:** identical to [http's options][http-options].
 
 Returns a $http PUT request for the designated link
 ```javascript
@@ -66,7 +66,7 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
 ```
 ### `$patch([key] [, options])`
 - **`key`:** refers to the link key.
-- **`options`:** identical to [$http's options][http-options].
+- **`options`:** identical to [http's options][http-options].
 
 Returns a $http PATCH request for the designated link
 ```javascript
@@ -78,7 +78,7 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
 ```
 ### `$delete([key] [, options])`
 - **`key`:** refers to the link key.
-- **`options`:** identical to [$http's options][http-options].
+- **`options`:** identical to [http's options][http-options].
 
 Returns a $http DELETE request for the designated link
 ```javascript
