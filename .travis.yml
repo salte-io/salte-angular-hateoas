@@ -8,7 +8,7 @@ cache:
 before_script:
 - npm test
 script:
-- webpack -p
+- npm run build
 after_script:
 - npm install coveralls && coveralls < coverage/lcov.txt
 deploy:
