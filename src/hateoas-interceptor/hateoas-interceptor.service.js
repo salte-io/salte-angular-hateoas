@@ -39,21 +39,21 @@ export default function hateoasInterceptor($hateoasConfig, $q, $injector) {
                 });
             });
 
-            defineHiddenProperty(data, '$post', (key, config) => {
+            defineHiddenProperty(data, '$post', (key, data, config) => {
                 return data.$link(key).then((link) => {
-                    return $http.post(link, config);
+                    return $http.post(link, data, config);
                 });
             });
 
-            defineHiddenProperty(data, '$put', (key, config) => {
+            defineHiddenProperty(data, '$put', (key, data, config) => {
                 return data.$link(key).then((link) => {
-                    return $http.put(link, config);
+                    return $http.put(link, data, config);
                 });
             });
 
-            defineHiddenProperty(data, '$patch', (key, config) => {
+            defineHiddenProperty(data, '$patch', (key, data, config) => {
                 return data.$link(key).then((link) => {
-                    return $http.patch(link, config);
+                    return $http.patch(link, data, config);
                 });
             });
 
