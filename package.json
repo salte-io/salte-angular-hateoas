@@ -1,6 +1,6 @@
 {
   "name": "arx-angular-hateoas",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "The simple way to consume HATEOAS enabled REST APIs with AngularJS",
   "main": "dist/arx-angular-hateoas.js",
   "repository": {
@@ -14,7 +14,8 @@
     "http"
   ],
   "scripts": {
-    "test": "karma start --single-run=true"
+    "test": "karma start --single-run=true",
+    "build": "webpack -p"
   },
   "author": "Arx Studios <nickwoodwrd@gmail.com>",
   "license": "MIT",
