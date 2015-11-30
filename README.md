@@ -86,7 +86,7 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
 Returns a $http DELETE request for the designated link
 ```javascript
 $http.get('/api/some-hateoas-endpoint').then(function(data) {
-    data.$delete('self', data).then(function(self) {
+    data.$delete('self', { data: data }).then(function(self) {
         // This will send a DELETE to the self link with a request body containing the data object.
     });
 });
