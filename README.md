@@ -48,7 +48,7 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
 Returns a $http POST request for the designated link
 ```javascript
 $http.get('/api/some-hateoas-endpoint').then(function(data) {
-    data.$post('self', { data: data }).then(function(self) {
+    data.$post('self', data).then(function(self) {
         // This will send a POST to the self link with a request body containing the data object.
     });
 });
@@ -61,7 +61,7 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
 Returns a $http PUT request for the designated link
 ```javascript
 $http.get('/api/some-hateoas-endpoint').then(function(data) {
-    data.$put('self', { data: data }).then(function(self) {
+    data.$put('self', data).then(function(self) {
         // This will send a PUT to the self link with a request body containing the data object.
     });
 });
@@ -74,7 +74,7 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
 Returns a $http PATCH request for the designated link
 ```javascript
 $http.get('/api/some-hateoas-endpoint').then(function(data) {
-    data.$patch('self', { data: data }).then(function(self) {
+    data.$patch('self', data).then(function(self) {
         // This will send a PATCH to the self link with a request body containing the data object.
     });
 });
@@ -86,7 +86,7 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
 Returns a $http DELETE request for the designated link
 ```javascript
 $http.get('/api/some-hateoas-endpoint').then(function(data) {
-    data.$delete('self', { data: data }).then(function(self) {
+    data.$delete('self', data).then(function(self) {
         // This will send a DELETE to the self link with a request body containing the data object.
     });
 });
