@@ -28,9 +28,9 @@ app.config(function($httpProvider) {
 ```
 
 ## API
-### `$get([key] [, options])`
-- **`key`:** refers to the link key.
-- **`options`:** identical to [$http's options][http-options].
+### `$get(key, [config])`
+- **`key`:** The link key
+- **`config`:** Optional configuration object **(identical to [$http's config][http-config])**
 
 Returns a $http GET request for the designated link
 ```javascript
@@ -40,9 +40,10 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
     });
 });
 ```
-### `$post([key] [, options])`
-- **`key`:** refers to the link key.
-- **`options`:** identical to [$http's options][http-options].
+### `$post(key, data, [config])`
+- **`key`:** The link key
+- **`data`:** Request content
+- **`config`:** Optional configuration object **(identical to [$http's config][http-config])**
 
 Returns a $http POST request for the designated link
 ```javascript
@@ -52,9 +53,10 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
     });
 });
 ```
-### `$put([key] [, options])`
-- **`key`:** refers to the link key.
-- **`options`:** identical to [$http's options][http-options].
+### `$put(key, data, [config])`
+- **`key`:** The link key
+- **`data`:** Request content
+- **`config`:** Optional configuration object **(identical to [$http's config][http-config])**
 
 Returns a $http PUT request for the designated link
 ```javascript
@@ -64,9 +66,10 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
     });
 });
 ```
-### `$patch([key] [, options])`
-- **`key`:** refers to the link key.
-- **`options`:** identical to [$http's options][http-options].
+### `$patch(key, data, [config])`
+- **`key`:** The link key
+- **`data`:** Request content
+- **`config`:** Optional configuration object ****(identical to [$http's config][http-config])****
 
 Returns a $http PATCH request for the designated link
 ```javascript
@@ -76,9 +79,9 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
     });
 });
 ```
-### `$delete([key] [, options])`
-- **`key`:** refers to the link key.
-- **`options`:** identical to [$http's options][http-options].
+### `$delete(key, [config])`
+- **`key`:** The link key
+- **`config`:** Optional configuration object **(identical to [$http's config][http-config])**
 
 Returns a $http DELETE request for the designated link
 ```javascript
@@ -88,8 +91,8 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
     });
 });
 ```
-### `$embedded([key])`
-- **`key`:** refers to the embedded key.
+### `$embedded(key)`
+- **`key`:** refers to the embedded key
 
 Returns a promise which resolves to an embedded object.
 ```javascript
@@ -99,11 +102,10 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
     });
 });
 ```
-### `$link([key])`
+### `$link(key)`
+- **`key`:** The link key
 
 Returns a promise which resolves to a link.
-- **`key`:** refers to the link key.
-
 ```javascript
 $http.get('/api/some-hateoas-endpoint').then(function(data) {
     data.$link('self').then(function(self) {
@@ -112,7 +114,7 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
 });
 ```
 
-## Options
+## config
 
 ### Setting the `links` key
 ```javascript
@@ -150,4 +152,4 @@ app.config(function($hateoasConfigProvider) {
 [david-dev-dependencies-url]: https://david-dm.org/arxstudios/arx-angular-hateoas#info=devDependencies
 
 [hateoas]: https://spring.io/understanding/HATEOAS
-[http-options]: https://docs.angularjs.org/api/ng/service/$http
+[http-config]: https://docs.angularjs.org/api/ng/service/$http
