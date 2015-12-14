@@ -26,16 +26,14 @@ export default function hateoasInterceptor($hateoasConfig, $q, $injector) {
             defineHiddenProperty(response, $hateoasConfig.getEmbeddedKey(), response[$hateoasConfig.getEmbeddedKey()]);
             defineHiddenProperty(response, '$embedded', (key) => {
                 var embedded = response[$hateoasConfig.getEmbeddedKey()];
-                return embedded && embedded[key] ? $q.when(embedded[key]) : $q.reject('We were unable to find an embedded value that matched the key, ' + key);
+                return embedded && embedded[key] ? $q.when(interceptor.transformHalResponse(embedded[key])) : $q.reject('We were unable to find an embedded value that matched the key, ' + key);
             });
 
             defineHiddenProperty(response, '$get', (key, config) => {
                 return response.$link(key).then((link) => {
                     return $http.get(link, config);
-                }, () => {
-                    return response.$embedded(key).then(interceptor.transformHalResponse);
                 }).catch(() => {
-                    return $q.reject('We were unable to find a link or embedded value that matched the key, ' + key);
+                    return $q.reject('We were unable to find a link that matches the key, ' + key);
                 });
             });
 
