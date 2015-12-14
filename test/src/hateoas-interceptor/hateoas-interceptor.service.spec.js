@@ -44,8 +44,15 @@ describe('Unit: hateoasInterceptor', () => {
                 expect(data.$get).toBeDefined();
             });
 
+            it('should not support embedded via $get', () => {
+                data.$get('locationList').catch((error) => {
+                    expect(error).toBeDefined();
+                });
+                $rootScope.$apply();
+            });
+
             it('should support embedded', () => {
-                data.$get('locationList').then((locationList) => {
+                data.$embedded('locationList').then((locationList) => {
                     expect(locationList).toBeDefined();
                     expect(locationList[0]).toBeDefined();
                     expect(locationList[0].$get).toBeDefined();
