@@ -2,12 +2,12 @@ var path = require('path');
 
 module.exports = {
     context: path.join(__dirname, 'src'),
-    entry: './arx-angular-hateoas.module.js',
+    entry: './salte-angular-hateoas.module.js',
     output: {
         path: 'dist',
-        filename: 'arx-angular-hateoas.js',
+        filename: 'salte-angular-hateoas.js',
         sourceMapFilename: '[file].map',
-        library: 'arxAngularHateoas',
+        library: 'salteAngularHateoas',
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
