@@ -14,7 +14,7 @@ after_script:
 deploy:
   provider: npm
   skip_cleanup: true
-  email: admin@arxstudios.net
+  email: admin@salte.io
   on:
     branch: master
     tags: true

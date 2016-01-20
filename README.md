@@ -11,15 +11,15 @@ The simple way to consume HATEOAS enabled REST APIs with AngularJS
 ## Installation
 
 ```
-$ npm install arx-angular-hateoas
+$ npm install salte-angular-hateoas
 ```
 
 ## Usage
-Enabling HATEOAS support is as simple as adding a dependency on `arx-angular-hateoas` to your application and pushing an interceptor.
+Enabling HATEOAS support is as simple as adding a dependency on `salte-angular-hateoas` to your application and pushing an interceptor.
 
 **NOTE: This will ONLY convert objects that return with the, "application/hal+json", Content-Type**
 ```javascript
-var app = angular.module('app', ['arx-angular-hateoas']);
+var app = angular.module('app', ['salte-angular-hateoas']);
 
 app.config(function($httpProvider) {
     // This will only intercept requests
@@ -136,20 +136,20 @@ app.config(function($hateoasConfigProvider) {
 ```
 
 ## License
-[MIT](https://github.com/arxstudios/arx-angular-hateoas/blob/master/LICENSE)
+[MIT](https://github.com/salte-io/salte-angular-hateoas/blob/master/LICENSE)
 
-[npm-version-image]: http://img.shields.io/npm/v/arx-angular-hateoas.svg?style=flat
-[npm-downloads-image]: http://img.shields.io/npm/dm/arx-angular-hateoas.svg?style=flat
-[npm-url]: https://npmjs.org/package/arx-angular-hateoas
+[npm-version-image]: http://img.shields.io/npm/v/salte-angular-hateoas.svg?style=flat
+[npm-downloads-image]: http://img.shields.io/npm/dm/salte-angular-hateoas.svg?style=flat
+[npm-url]: https://npmjs.org/package/salte-angular-hateoas
 
-[travis-ci-image]: https://img.shields.io/travis/arxstudios/arx-angular-hateoas.svg?style=flat
-[travis-ci-url]: https://travis-ci.org/arxstudios/arx-angular-hateoas
+[travis-ci-image]: https://img.shields.io/travis/salte-io/salte-angular-hateoas.svg?style=flat
+[travis-ci-url]: https://travis-ci.org/salte-io/salte-angular-hateoas
 
-[coveralls-image]: https://img.shields.io/coveralls/arxstudios/arx-angular-hateoas/master.svg
-[coveralls-url]: https://coveralls.io/github/arxstudios/arx-angular-hateoas
+[coveralls-image]: https://img.shields.io/coveralls/salte-io/salte-angular-hateoas/master.svg
+[coveralls-url]: https://coveralls.io/github/salte-io/salte-angular-hateoas
 
-[david-dev-dependencies-image]: https://img.shields.io/david/dev/arxstudios/arx-angular-hateoas.svg
-[david-dev-dependencies-url]: https://david-dm.org/arxstudios/arx-angular-hateoas#info=devDependencies
+[david-dev-dependencies-image]: https://img.shields.io/david/dev/salte-io/salte-angular-hateoas.svg
+[david-dev-dependencies-url]: https://david-dm.org/salte-io/salte-angular-hateoas#info=devDependencies
 
 [hateoas]: https://spring.io/understanding/HATEOAS
 [http-config]: https://docs.angularjs.org/api/ng/service/$http

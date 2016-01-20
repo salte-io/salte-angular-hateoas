@@ -3,7 +3,7 @@
 describe('Unit: hateoasInterceptor', () => {
     var hateoasInterceptor, $httpBackend, $http, $rootScope, data;
     var headers = { 'Content-Type': 'application/hal+json' };
-    beforeEach(module('arx-angular-hateoas'));
+    beforeEach(module('salte-angular-hateoas'));
     beforeEach(inject((_hateoasInterceptor_, _$httpBackend_, _$http_, _$rootScope_) => {
         hateoasInterceptor = _hateoasInterceptor_;
         $httpBackend = _$httpBackend_;
