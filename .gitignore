@@ -3,3 +3,4 @@ coverage
 dist
 npm-debug.log*
 sc_karma*.log
+yarn-error.log
