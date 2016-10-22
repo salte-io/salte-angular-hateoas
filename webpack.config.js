@@ -1,4 +1,4 @@
-var path = require('path');
+const path = require('path');
 
 module.exports = {
     context: path.join(__dirname, 'src'),
@@ -11,6 +11,14 @@ module.exports = {
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
+    externals: [{
+        angular: {
+            root: 'angular',
+            commonjs2: 'angular',
+            commonjs: 'angular',
+            amd: 'angular'
+        }
+    }],
     devtool: 'source-map',
     module: {
         preLoaders: [{
