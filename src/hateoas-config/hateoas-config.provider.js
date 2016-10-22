@@ -1,6 +1,6 @@
 /* @ngInject */
 export default function $hateoasConfig() {
-    var config = {
+    let config = {
         keys: {
             links: '_links',
             embedded: '_embedded'
@@ -30,7 +30,6 @@ export default function $hateoasConfig() {
                 return config;
             },
             getLinksKey: () => {
-
                 return config.keys.links;
             },
             getEmbeddedKey: () => {
@@ -39,6 +38,6 @@ export default function $hateoasConfig() {
             getReadOnly: () => {
                 return config.readonly;
             }
-        }
+        };
     };
 }

@@ -1,10 +1,12 @@
 # Angular Hateoas
+[![Slack Status][slack-image]][slack-url]
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
 [![Travis][travis-ci-image]][travis-ci-url]
 [![Coveralls][coveralls-image]][coveralls-url]
 
-[![David Dependencies][david-dev-dependencies-image]][david-dev-dependencies-url]
+[![Commitizen friendly][commitizen-image]][commitizen-url]
+[![semantic-release][semantic-release-image]][semantic-release-url]
 
 The simple way to consume HATEOAS enabled REST APIs with AngularJS
 
@@ -138,18 +140,22 @@ app.config(function($hateoasConfigProvider) {
 ## License
 [MIT](https://github.com/salte-io/salte-angular-hateoas/blob/master/LICENSE)
 
+
+[slack-image]: https://salte-slack.herokuapp.com/badge.svg
+[slack-url]: https://salte-slack.herokuapp.com/
+
 [npm-version-image]: http://img.shields.io/npm/v/salte-angular-hateoas.svg?style=flat
 [npm-downloads-image]: http://img.shields.io/npm/dm/salte-angular-hateoas.svg?style=flat
 [npm-url]: https://npmjs.org/package/salte-angular-hateoas
 
-[travis-ci-image]: https://img.shields.io/travis/salte-io/salte-angular-hateoas.svg?style=flat
+[travis-ci-image]: https://img.shields.io/travis/salte-io/salte-angular-hateoas/master.svg?style=flat
 [travis-ci-url]: https://travis-ci.org/salte-io/salte-angular-hateoas
 
 [coveralls-image]: https://img.shields.io/coveralls/salte-io/salte-angular-hateoas/master.svg
 [coveralls-url]: https://coveralls.io/github/salte-io/salte-angular-hateoas
 
-[david-dev-dependencies-image]: https://img.shields.io/david/dev/salte-io/salte-angular-hateoas.svg
-[david-dev-dependencies-url]: https://david-dm.org/salte-io/salte-angular-hateoas#info=devDependencies
+[commitizen-image]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
+[commitizen-url]: http://commitizen.github.io/cz-cli/
 
-[hateoas]: https://spring.io/understanding/HATEOAS
-[http-config]: https://docs.angularjs.org/api/ng/service/$http
+[semantic-release-url]: https://github.com/semantic-release/semantic-release
+[semantic-release-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg

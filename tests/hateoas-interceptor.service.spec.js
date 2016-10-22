@@ -1,10 +1,11 @@
-'use strict';
+import angular from 'angular';
+import salteAngularHateoas from '../src/salte-angular-hateoas.module.js';
 
-describe('Unit: hateoasInterceptor', () => {
-    var hateoasInterceptor, $httpBackend, $http, $rootScope, data;
-    var headers = { 'Content-Type': 'application/hal+json' };
-    beforeEach(module('salte-angular-hateoas'));
-    beforeEach(inject((_hateoasInterceptor_, _$httpBackend_, _$http_, _$rootScope_) => {
+describe('hateoas-interceptor', () => {
+    let hateoasInterceptor, $httpBackend, $http, $rootScope, data;
+    const headers = { 'Content-Type': 'application/hal+json' };
+    beforeEach(angular.mock.module(salteAngularHateoas));
+    beforeEach(angular.mock.inject((_hateoasInterceptor_, _$httpBackend_, _$http_, _$rootScope_) => {
         hateoasInterceptor = _hateoasInterceptor_;
         $httpBackend = _$httpBackend_;
         $http = _$http_;

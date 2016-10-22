@@ -1,4 +1,5 @@
-node_modules/
-dist/
-coverage/
-*.log
+node_modules
+coverage
+dist
+npm-debug.log*
+sc_karma*.log

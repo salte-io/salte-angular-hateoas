@@ -1,0 +1,11 @@
+extends: ../.eslintrc.yml
+plugins:
+  - jasmine
+env:
+  jasmine: true
+globals:
+  assert: true
+  expect: true
+rules:
+  no-unused-expressions: 0
+  no-invalid-this: 0

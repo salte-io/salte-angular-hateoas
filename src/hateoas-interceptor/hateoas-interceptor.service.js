@@ -1,6 +1,6 @@
 /* @ngInject */
 export default function hateoasInterceptor($hateoasConfig, $q, $injector) {
-    var interceptor = this;
+    const interceptor = this;
 
     interceptor.response = (response) => {
         if (response.headers('Content-Type') === 'application/hal+json') {
@@ -8,7 +8,7 @@ export default function hateoasInterceptor($hateoasConfig, $q, $injector) {
         }
         return response;
     };
-    var $http;
+    let $http;
 
     interceptor.transformHalResponse = (response) => {
         if (response.length) {
@@ -19,13 +19,13 @@ export default function hateoasInterceptor($hateoasConfig, $q, $injector) {
 
             defineHiddenProperty(response, $hateoasConfig.getLinksKey(), response[$hateoasConfig.getLinksKey()]);
             defineHiddenProperty(response, '$link', (key) => {
-                var links = response[$hateoasConfig.getLinksKey()];
+                const links = response[$hateoasConfig.getLinksKey()];
                 return links && links[key] ? $q.when(links[key].href) : $q.reject('We were unable to find a link that matched the key, ' + key);
             });
 
             defineHiddenProperty(response, $hateoasConfig.getEmbeddedKey(), response[$hateoasConfig.getEmbeddedKey()]);
             defineHiddenProperty(response, '$embedded', (key) => {
-                var embedded = response[$hateoasConfig.getEmbeddedKey()];
+                const embedded = response[$hateoasConfig.getEmbeddedKey()];
                 return embedded && embedded[key] ? $q.when(interceptor.transformHalResponse(embedded[key])) : $q.reject('We were unable to find an embedded value that matched the key, ' + key);
             });
 
@@ -69,7 +69,7 @@ export default function hateoasInterceptor($hateoasConfig, $q, $injector) {
         }
 
         return response;
-    }
+    };
 
     function defineProperty(object, name, value) {
         Object.defineProperty(object, name, {
