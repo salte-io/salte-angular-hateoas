@@ -71,7 +71,7 @@ $http.get('/api/some-hateoas-endpoint').then(function(data) {
 ### `$patch(key, data, [config])`
 - **`key`:** The link key
 - **`data`:** Request content
-- **`config`:** Optional configuration object ****(identical to [$http's config][http-config])****
+- **`config`:** Optional configuration object **(identical to [$http's config][http-config])**
 
 Returns a $http PATCH request for the designated link
 ```javascript
