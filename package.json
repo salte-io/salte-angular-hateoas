@@ -54,7 +54,7 @@
     "karma-webpack": "^1.8.0",
     "ng-annotate-loader": "^0.2.0",
     "phantomjs": "^2.1.7",
-    "semantic-release": "^4.3.5",
+    "semantic-release": "^6.3.2",
     "webpack": "^1.13.2"
   },
   "config": {
