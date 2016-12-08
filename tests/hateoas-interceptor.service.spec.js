@@ -92,7 +92,7 @@ describe('hateoas-interceptor', () => {
             });
 
             it('should support embedded', () => {
-                data.$get('location').then((location) => {
+                data.$embedded('location').then((location) => {
                     expect(location).toBeDefined();
                     expect(location.$get).toBeDefined();
                 });
