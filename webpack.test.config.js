@@ -3,15 +3,15 @@ module.exports = {
     pathinfo: true
   },
   module: {
-    preLoaders: [{
-      test: /\.js$/,
-      include: /tests/,
-      loader: 'eslint'
-    }],
-    loaders: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel'
+    rules: [{
+        enforce: 'pre',
+        test: /\.js$/,
+        include: /tests/,
+        loader: 'eslint-loader'
+    }, {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
     }]
   },
   devtool: 'inline-source-map'

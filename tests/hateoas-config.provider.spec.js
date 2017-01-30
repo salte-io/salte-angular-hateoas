@@ -5,6 +5,7 @@ describe('hateoas-config', () => {
     beforeEach(angular.mock.module(hateoasConfig, (_$hateoasConfigProvider_) => {
         $hateoasConfigProvider = _$hateoasConfigProvider_;
     }));
+    beforeEach(angular.mock.inject.strictDi(true));
     beforeEach(angular.mock.inject((_$hateoasConfig_) => {
         $hateoasConfig = _$hateoasConfig_;
     }));
