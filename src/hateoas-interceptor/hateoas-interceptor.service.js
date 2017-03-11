@@ -1,4 +1,3 @@
-/* @ngInject */
 export default function hateoasInterceptor($hateoasConfig, $q, $injector) {
     const interceptor = this;
 
@@ -86,3 +85,4 @@ export default function hateoasInterceptor($hateoasConfig, $q, $injector) {
         });
     }
 }
+hateoasInterceptor.$inject = ['$hateoasConfig', '$q', '$injector'];

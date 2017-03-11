@@ -5,6 +5,7 @@ describe('hateoas-interceptor', () => {
     let hateoasInterceptor, $httpBackend, $http, $rootScope, data;
     const headers = { 'Content-Type': 'application/hal+json' };
     beforeEach(angular.mock.module(salteAngularHateoas));
+    beforeEach(angular.mock.inject.strictDi(true));
     beforeEach(angular.mock.inject((_hateoasInterceptor_, _$httpBackend_, _$http_, _$rootScope_) => {
         hateoasInterceptor = _hateoasInterceptor_;
         $httpBackend = _$httpBackend_;

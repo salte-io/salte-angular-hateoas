@@ -1,8 +1,9 @@
 const webpackConfig = require('./webpack.test.config.js');
-webpackConfig.module.preLoaders.push({
+webpackConfig.module.rules.push({
+  enforce: 'pre',
   test: /\.js$/,
   exclude: /tests|node_modules/,
-  loader: 'isparta'
+  loader: 'isparta-loader'
 });
 
 module.exports = function(config) {
