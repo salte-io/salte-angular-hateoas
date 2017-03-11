@@ -1,4 +1,3 @@
-/* @ngInject */
 export default function $hateoasConfig() {
     let config = {
         keys: {
