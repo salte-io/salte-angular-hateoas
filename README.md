@@ -1,6 +1,6 @@
 # Angular Hateoas
 
-[![Slack Status][slack-image]][slack-url]
+[![Gitter](https://badges.gitter.im/salte-io/salte-angular-hateoas.svg)](https://gitter.im/salte-io/salte-angular-hateoas?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
 [![Travis][travis-ci-image]][travis-ci-url]
@@ -162,9 +162,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
-[slack-image]: https://salte-slack.herokuapp.com/badge.svg
-[slack-url]: https://salte-slack.herokuapp.com/
 
 [npm-version-image]: http://img.shields.io/npm/v/salte-angular-hateoas.svg?style=flat
 [npm-downloads-image]: http://img.shields.io/npm/dm/salte-angular-hateoas.svg?style=flat
