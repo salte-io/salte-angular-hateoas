@@ -1,6 +1,6 @@
 # Angular Hateoas
 
-[![Gitter](https://badges.gitter.im/salte-io/salte-auth-angular.svg)](https://gitter.im/salte-io/salte-auth-angular?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Gitter](https://badges.gitter.im/salte-io/salte-angular-hateoas.svg)](https://gitter.im/salte-io/salte-angular-hateoas?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![NPM Version][npm-version-image]][npm-url]
 [![NPM Downloads][npm-downloads-image]][npm-url]
 [![Travis][travis-ci-image]][travis-ci-url]
