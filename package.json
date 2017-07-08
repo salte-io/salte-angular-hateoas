@@ -39,7 +39,7 @@
     "coveralls": "^2.11.14",
     "deindent": "^0.1.0",
     "eslint": "^4.1.0",
-    "eslint-config-google": "^0.7.0",
+    "eslint-config-google": "^0.8.1",
     "eslint-loader": "^1.6.0",
     "eslint-plugin-jasmine": "^2.6.2",
     "eslint-plugin-mocha": "^4.8.0",
