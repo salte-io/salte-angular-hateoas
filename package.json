@@ -55,7 +55,7 @@
     "karma-spec-reporter": "^0.0.31",
     "karma-webpack": "^2.0.1",
     "phantomjs": "^2.1.7",
-    "semantic-release": "^6.3.2",
+    "semantic-release": "^7.0.1",
     "webpack": "^3.1.0"
   },
   "config": {
