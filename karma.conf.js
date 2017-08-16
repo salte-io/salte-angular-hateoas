@@ -11,17 +11,15 @@ module.exports = function(config) {
     basePath: '',
 
     frameworks: [
-      'jasmine'
+      'mocha'
     ],
 
     files: [
-      'node_modules/angular/angular.js',
-      'node_modules/angular-mocks/angular-mocks.js',
-      'tests/**/*.spec.js'
+      'tests/index.js'
     ],
 
     preprocessors: {
-      'tests/**/*.spec.js': ['webpack', 'sourcemap']
+      'tests/index.js': ['webpack', 'sourcemap']
     },
 
     webpack: webpackConfig,
@@ -34,9 +32,14 @@ module.exports = function(config) {
 
     coverageReporter: {
       dir: 'coverage',
-      reporters: [
-        { type: 'text' },
-        { type: 'lcovonly', subdir: '.', file: 'lcov.info' }
+      reporters: [{
+          type: 'text'
+        },
+        {
+          type: 'lcovonly',
+          subdir: '.',
+          file: 'lcov.info'
+        }
       ]
     },
 

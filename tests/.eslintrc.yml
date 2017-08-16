@@ -1,11 +1,8 @@
 extends: ../.eslintrc.yml
 plugins:
-  - jasmine
+  - mocha
 env:
-  jasmine: true
-globals:
-  assert: true
-  expect: true
+  mocha: true
 rules:
   no-unused-expressions: 0
   no-invalid-this: 0

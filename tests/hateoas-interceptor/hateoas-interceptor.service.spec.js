@@ -1,5 +1,5 @@
-import angular from 'angular';
-import salteAngularHateoas from '../src/salte-angular-hateoas.module.js';
+import salteAngularHateoas from '../../src/salte-angular-hateoas.module.js';
+import { expect } from 'chai';
 
 describe('hateoas-interceptor', () => {
     let hateoasInterceptor, $httpBackend, $http, $rootScope, data;
@@ -14,7 +14,7 @@ describe('hateoas-interceptor', () => {
     }));
 
     it('should be defined', () => {
-        expect(hateoasInterceptor).toBeDefined();
+        expect(hateoasInterceptor).to.not.be.undefined;
     });
 
     describe('Function: TransformHalResponse', () => {
@@ -42,31 +42,31 @@ describe('hateoas-interceptor', () => {
             });
 
             it('should be defined', () => {
-                expect(data).toBeDefined();
-                expect(data.$get).toBeDefined();
+                expect(data).to.not.be.undefined;
+                expect(data.$get).to.not.be.undefined;
             });
 
             it('should not support embedded via $get', () => {
                 data.$get('locationList').catch((error) => {
-                    expect(error).toBeDefined();
+                    expect(error).to.not.be.undefined;
                 });
                 $rootScope.$apply();
             });
 
             it('should support embedded', () => {
                 data.$embedded('locationList').then((locationList) => {
-                    expect(locationList).toBeDefined();
-                    expect(locationList[0]).toBeDefined();
-                    expect(locationList[0].$get).toBeDefined();
+                    expect(locationList).to.not.be.undefined;
+                    expect(locationList[0]).to.not.be.undefined;
+                    expect(locationList[0].$get).to.not.be.undefined;
                 });
                 $rootScope.$apply();
             });
 
             it('should support links', () => {
                 data.$get('self').then(hateoasInterceptor.response).then((location) => {
-                    expect(location).toBeDefined();
-                    expect(location.$get).toBeDefined();
-                    expect(location).toEqual(data);
+                    expect(location).to.not.be.undefined;
+                    expect(location.$get).to.not.be.undefined;
+                    expect(location).to.deep.equal(data);
                 });
                 $httpBackend.flush();
             });
@@ -88,23 +88,23 @@ describe('hateoas-interceptor', () => {
             });
 
             it('should be defined', () => {
-                expect(data).toBeDefined();
-                expect(data.$get).toBeDefined();
+                expect(data).to.not.be.undefined;
+                expect(data.$get).to.not.be.undefined;
             });
 
             it('should support embedded', () => {
                 data.$embedded('location').then((location) => {
-                    expect(location).toBeDefined();
-                    expect(location.$get).toBeDefined();
+                    expect(location).to.not.be.undefined;
+                    expect(location.$get).to.not.be.undefined;
                 });
                 $rootScope.$apply();
             });
 
             it('should support links', () => {
                 data.$get('self').then(hateoasInterceptor.response).then((locations) => {
-                    expect(locations).toBeDefined();
-                    expect(locations.$get).toBeDefined();
-                    expect(locations).toEqual(data);
+                    expect(locations).to.not.be.undefined;
+                    expect(locations.$get).to.not.be.undefined;
+                    expect(locations).to.deep.equal(data);
                 });
                 $httpBackend.flush();
             });
@@ -124,20 +124,20 @@ describe('hateoas-interceptor', () => {
             });
 
             it('should be defined', () => {
-                expect(data).toBeDefined();
-                expect(data.$get).toBeDefined();
+                expect(data).to.not.be.undefined;
+                expect(data.$get).to.not.be.undefined;
             });
 
             it('should not support embedded', () => {
-                data.$get('location').catch((error) => expect(error).toBeDefined());
+                data.$get('location').catch((error) => expect(error).to.not.be.undefined);
                 $rootScope.$apply();
             });
 
             it('should support links', () => {
                 data.$get('self').then(hateoasInterceptor.response).then((locations) => {
-                    expect(locations).toBeDefined();
-                    expect(locations.$get).toBeDefined();
-                    expect(locations).toEqual(data);
+                    expect(locations).to.not.be.undefined;
+                    expect(locations.$get).to.not.be.undefined;
+                    expect(locations).to.deep.equal(data);
                 });
                 $httpBackend.flush();
             });
@@ -154,20 +154,20 @@ describe('hateoas-interceptor', () => {
             });
 
             it('should be defined', () => {
-                expect(data).toBeDefined();
-                expect(data.$get).toBeDefined();
+                expect(data).to.not.be.undefined;
+                expect(data.$get).to.not.be.undefined;
             });
 
             it('should not support embedded', () => {
-                data.$get('location').catch((error) => expect(error).toBeDefined());
+                data.$get('location').catch((error) => expect(error).to.not.be.undefined);
                 $rootScope.$apply();
             });
 
             it('should support links', () => {
                 data.$get('self').then(hateoasInterceptor.response).then((locations) => {
-                    expect(locations).toBeDefined();
-                    expect(locations.$get).toBeDefined();
-                    expect(locations).toEqual(data);
+                    expect(locations).to.not.be.undefined;
+                    expect(locations.$get).to.not.be.undefined;
+                    expect(locations).to.deep.equal(data);
                 });
                 $httpBackend.flush();
             });
