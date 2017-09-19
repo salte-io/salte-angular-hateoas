@@ -58,7 +58,7 @@
     "karma-webpack": "^2.0.1",
     "mocha": "^3.5.0",
     "phantomjs-prebuilt": "^2.1.15",
-    "semantic-release": "^7.0.0",
+    "semantic-release": "^8.0.0",
     "webpack": "^3.1.0"
   },
   "config": {
