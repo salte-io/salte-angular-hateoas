@@ -1,42 +1,44 @@
-export default function $hateoasConfig() {
-    let config = {
-        keys: {
-            links: '_links',
-            embedded: '_embedded'
-        },
-        readonly: true
+export default class $hateoasConfigProvider {
+  constructor() {
+    this.config = {
+      keys: {
+        links: '_links',
+        embedded: '_embedded'
+      },
+      readonly: true
     };
+  }
 
-    this.setConfig = (value) => {
-        config = value;
-    };
+  setConfig(value) {
+    this.config = value;
+  }
 
-    this.setLinksKey = (value) => {
-        config.keys.links = value;
-    };
+  setLinksKey(value) {
+    this.config.keys.links = value;
+  }
 
-    this.setEmbeddedKey = (value) => {
-        config.keys.embedded = value;
-    };
+  setEmbeddedKey(value) {
+    this.config.keys.embedded = value;
+  }
 
-    this.setReadOnly = (value) => {
-        config.readonly = value;
-    };
+  setReadOnly(value) {
+    this.config.readonly = value;
+  }
 
-    this.$get = function() {
-        return {
-            getConfig: () => {
-                return config;
-            },
-            getLinksKey: () => {
-                return config.keys.links;
-            },
-            getEmbeddedKey: () => {
-                return config.keys.embedded;
-            },
-            getReadOnly: () => {
-                return config.readonly;
-            }
-        };
+  $get() {
+    return {
+      getConfig: () => {
+        return this.config;
+      },
+      getLinksKey: () => {
+        return this.config.keys.links;
+      },
+      getEmbeddedKey: () => {
+        return this.config.keys.embedded;
+      },
+      getReadOnly: () => {
+        return this.config.readonly;
+      }
     };
+  }
 }

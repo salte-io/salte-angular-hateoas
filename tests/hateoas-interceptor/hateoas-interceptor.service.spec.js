@@ -1,176 +1,421 @@
-import salteAngularHateoas from '../../src/salte-angular-hateoas.module.js';
 import { expect } from 'chai';
 
+import mocks from '../mocks/mocks.js';
+import salteAngularHateoas from '../../src/salte-angular-hateoas.module.js';
+
 describe('hateoas-interceptor', () => {
-    let hateoasInterceptor, $httpBackend, $http, $rootScope, data;
-    const headers = { 'Content-Type': 'application/hal+json' };
-    beforeEach(angular.mock.module(salteAngularHateoas));
-    beforeEach(angular.mock.inject.strictDi(true));
-    beforeEach(angular.mock.inject((_hateoasInterceptor_, _$httpBackend_, _$http_, _$rootScope_) => {
-        hateoasInterceptor = _hateoasInterceptor_;
-        $httpBackend = _$httpBackend_;
-        $http = _$http_;
-        $rootScope = _$rootScope_;
-    }));
+  let $httpBackend, $http, $hateoasConfigProvider;
+  const headers = { 'Content-Type': 'application/hal+json' };
+  beforeEach(angular.mock.module(salteAngularHateoas, ($httpProvider, _$hateoasConfigProvider_) => {
+    $httpProvider.interceptors.push('hateoasInterceptor');
+    $hateoasConfigProvider = _$hateoasConfigProvider_;
+  }));
+  beforeEach(angular.mock.inject.strictDi(true));
+  beforeEach(angular.mock.inject((_$httpBackend_, _$http_) => {
+    $httpBackend = _$httpBackend_;
+    $http = _$http_;
+  }));
 
-    it('should be defined', () => {
-        expect(hateoasInterceptor).to.not.be.undefined;
+  describe('interceptor(response)', () => {
+    it('should include hal content-types', (done) => {
+      $httpBackend.whenGET('/api/locations').respond(200, mocks.embeddedLists, headers);
+      $http.get('/api/locations').then((response) => {
+        expect(response.$get).to.not.be.undefined;
+        done();
+      });
+      $httpBackend.flush();
     });
 
-    describe('Function: TransformHalResponse', () => {
-        describe('Scenario: Embedded List', () => {
-            beforeEach(() => {
-                $httpBackend.whenGET('/api/locations').respond(200, {
-                    '_embedded': {
-                        'locationList': [{
-                            'locationId': 1,
-                            '_links': {
-                                'self': {
-                                    'href': '/api/locations/1'
-                                }
-                            }
-                        }]
-                    },
-                    '_links': {
-                        'self': {
-                            'href': '/api/locations'
-                        }
-                    }
-                }, headers);
-                $http.get('/api/locations').then(hateoasInterceptor.response).then((response) => data = response);
-                $httpBackend.flush();
-            });
-
-            it('should be defined', () => {
-                expect(data).to.not.be.undefined;
-                expect(data.$get).to.not.be.undefined;
-            });
-
-            it('should not support embedded via $get', () => {
-                data.$get('locationList').catch((error) => {
-                    expect(error).to.not.be.undefined;
-                });
-                $rootScope.$apply();
-            });
-
-            it('should support embedded', () => {
-                data.$embedded('locationList').then((locationList) => {
-                    expect(locationList).to.not.be.undefined;
-                    expect(locationList[0]).to.not.be.undefined;
-                    expect(locationList[0].$get).to.not.be.undefined;
-                });
-                $rootScope.$apply();
-            });
-
-            it('should support links', () => {
-                data.$get('self').then(hateoasInterceptor.response).then((location) => {
-                    expect(location).to.not.be.undefined;
-                    expect(location.$get).to.not.be.undefined;
-                    expect(location).to.deep.equal(data);
-                });
-                $httpBackend.flush();
-            });
+    it('should ignore non-hal content-types', (done) => {
+      $httpBackend.whenGET('/api/locations').respond(200, {
+        'name': 'bob'
+      });
+      $http.get('/api/locations').then((response) => {
+        expect(response.$get).to.be.undefined;
+        expect(response.data).to.deep.equal({
+          'name': 'bob'
         });
-
-        describe('Scenario: Embedded Object', () => {
-            beforeEach(() => {
-                $httpBackend.whenGET('/api/locations').respond(200, {
-                    '_embedded': {
-                        'location': {
-                            'locationId': 1,
-                            '_links': { 'self': { 'href': '/api/locations/1' } }
-                        }
-                    },
-                    '_links': { 'self': { 'href': '/api/locations' } }
-                }, headers);
-                $http.get('/api/locations').then(hateoasInterceptor.response).then((response) => data = response);
-                $httpBackend.flush();
-            });
-
-            it('should be defined', () => {
-                expect(data).to.not.be.undefined;
-                expect(data.$get).to.not.be.undefined;
-            });
-
-            it('should support embedded', () => {
-                data.$embedded('location').then((location) => {
-                    expect(location).to.not.be.undefined;
-                    expect(location.$get).to.not.be.undefined;
-                });
-                $rootScope.$apply();
-            });
-
-            it('should support links', () => {
-                data.$get('self').then(hateoasInterceptor.response).then((locations) => {
-                    expect(locations).to.not.be.undefined;
-                    expect(locations.$get).to.not.be.undefined;
-                    expect(locations).to.deep.equal(data);
-                });
-                $httpBackend.flush();
-            });
-        });
-
-        describe('Scenario: Solo List', () => {
-            beforeEach(() => {
-                $httpBackend.whenGET('/api/locations').respond(200, {
-                    'locationList': {
-                        'locationId': 1,
-                        '_links': { 'self': { 'href': '/api/locations/1' } }
-                    },
-                    '_links': { 'self': { 'href': '/api/locations' } }
-                }, headers);
-                $http.get('/api/locations').then(hateoasInterceptor.response).then((response) => data = response);
-                $httpBackend.flush();
-            });
-
-            it('should be defined', () => {
-                expect(data).to.not.be.undefined;
-                expect(data.$get).to.not.be.undefined;
-            });
-
-            it('should not support embedded', () => {
-                data.$get('location').catch((error) => expect(error).to.not.be.undefined);
-                $rootScope.$apply();
-            });
-
-            it('should support links', () => {
-                data.$get('self').then(hateoasInterceptor.response).then((locations) => {
-                    expect(locations).to.not.be.undefined;
-                    expect(locations.$get).to.not.be.undefined;
-                    expect(locations).to.deep.equal(data);
-                });
-                $httpBackend.flush();
-            });
-        });
-
-        describe('Scenario: Solo Object', () => {
-            beforeEach(() => {
-                $httpBackend.whenGET('/api/locations/1').respond(200, {
-                    'locationId': 1,
-                    '_links': { 'self': { 'href': '/api/locations/1' } }
-                }, headers);
-                $http.get('/api/locations/1').then(hateoasInterceptor.response).then((response) => data = response);
-                $httpBackend.flush();
-            });
-
-            it('should be defined', () => {
-                expect(data).to.not.be.undefined;
-                expect(data.$get).to.not.be.undefined;
-            });
-
-            it('should not support embedded', () => {
-                data.$get('location').catch((error) => expect(error).to.not.be.undefined);
-                $rootScope.$apply();
-            });
-
-            it('should support links', () => {
-                data.$get('self').then(hateoasInterceptor.response).then((locations) => {
-                    expect(locations).to.not.be.undefined;
-                    expect(locations.$get).to.not.be.undefined;
-                    expect(locations).to.deep.equal(data);
-                });
-                $httpBackend.flush();
-            });
-        });
+        done();
+      });
+      $httpBackend.flush();
     });
+  });
+
+  describe('link($link)', () => {
+    it('should support embedded lists', (done) => {
+      $httpBackend.whenGET('/api/locations').respond(200, mocks.embeddedLists, headers);
+      $http.get('/api/locations').then((response) => {
+        response.$link('self').then((link) => {
+          expect(link).to.equal('/api/locations');
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should support an embedded object', (done) => {
+      $httpBackend.whenGET('/api/locations').respond(200, mocks.embeddedObject, headers);
+      $http.get('/api/locations').then((response) => {
+        response.$link('self').then((link) => {
+          expect(link).to.equal('/api/locations');
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should support solo lists', (done) => {
+      $httpBackend.whenGET('/api/locations').respond(200, mocks.soloLists, headers);
+      $http.get('/api/locations').then((response) => {
+        response.$link('self').then((link) => {
+          expect(link).to.equal('/api/locations');
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should support a solo object', (done) => {
+      $httpBackend.whenGET('/api/locations').respond(200, mocks.soloObject, headers);
+      $http.get('/api/locations').then((response) => {
+        response.$link('self').then((link) => {
+          expect(link).to.equal('/api/locations/1');
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should support no links', (done) => {
+      $httpBackend.whenGET('/api/locations').respond(200, {
+        'name': 'bob'
+      }, headers);
+      $http.get('/api/locations').then((response) => {
+        response.$link('self').catch((error) => {
+          expect(error).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+  });
+
+  describe('link($embedded)', () => {
+    it('should support embedded lists', (done) => {
+      $httpBackend.whenGET('/api/locations').respond(200, mocks.embeddedLists, headers);
+      $http.get('/api/locations').then((response) => {
+        response.$embedded('locationList').then((locationList) => {
+          expect(locationList).to.not.be.undefined;
+          expect(locationList[0]).to.not.be.undefined;
+          expect(locationList[0].$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should support an embedded object', (done) => {
+      $httpBackend.whenGET('/api/locations').respond(200, mocks.embeddedObject, headers);
+      $http.get('/api/locations').then((response) => {
+        response.$embedded('location').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should not support solo lists', (done) => {
+      $httpBackend.whenGET('/api/locations').respond(200, mocks.soloLists, headers);
+      $http.get('/api/locations').then((response) => {
+        response.$embedded('location').catch((error) => {
+          expect(error).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should not support a solo object', (done) => {
+      $httpBackend.whenGET('/api/locations').respond(200, mocks.soloObject, headers);
+      $http.get('/api/locations').then((response) => {
+        response.$embedded('location').catch((error) => {
+          expect(error).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+  });
+
+  describe('link($get)', () => {
+    it('should support embedded lists', (done) => {
+      $httpBackend.whenGET('/api/locations').respond(200, mocks.embeddedLists, headers);
+      $http.get('/api/locations').then((response) => {
+        response.$get('self').then((locationList) => {
+          expect(locationList).to.not.be.undefined;
+          expect(locationList.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should support an embedded object', (done) => {
+      $httpBackend.whenGET('/api/locations').respond(200, mocks.embeddedObject, headers);
+      $http.get('/api/locations').then((response) => {
+        response.$get('self').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should not support solo lists', (done) => {
+      $httpBackend.whenGET('/api/locations').respond(200, mocks.soloLists, headers);
+      $http.get('/api/locations').then((response) => {
+        response.$get('self').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should not support a solo object', (done) => {
+      $httpBackend.whenGET('/api/locations').respond(200, mocks.soloObject, headers);
+      $httpBackend.whenGET('/api/locations/1').respond(200, mocks.soloObject, headers);
+      $http.get('/api/locations').then((response) => {
+        response.$get('self').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+  });
+
+  describe('link($post)', () => {
+    it('should support embedded lists', (done) => {
+      $httpBackend.whenPOST('/api/locations').respond(200, mocks.embeddedLists, headers);
+      $http.post('/api/locations').then((response) => {
+        response.$post('self').then((locationList) => {
+          expect(locationList).to.not.be.undefined;
+          expect(locationList.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should support an embedded object', (done) => {
+      $httpBackend.whenPOST('/api/locations').respond(200, mocks.embeddedObject, headers);
+      $http.post('/api/locations').then((response) => {
+        response.$post('self').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should not support solo lists', (done) => {
+      $httpBackend.whenPOST('/api/locations').respond(200, mocks.soloLists, headers);
+      $http.post('/api/locations').then((response) => {
+        response.$post('self').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should not support a solo object', (done) => {
+      $httpBackend.whenPOST('/api/locations').respond(200, mocks.soloObject, headers);
+      $httpBackend.whenPOST('/api/locations/1').respond(200, mocks.soloObject, headers);
+      $http.post('/api/locations').then((response) => {
+        response.$post('self').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+  });
+
+  describe('link($put)', () => {
+    it('should support embedded lists', (done) => {
+      $httpBackend.whenPUT('/api/locations').respond(200, mocks.embeddedLists, headers);
+      $http.put('/api/locations').then((response) => {
+        response.$put('self').then((locationList) => {
+          expect(locationList).to.not.be.undefined;
+          expect(locationList.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should support an embedded object', (done) => {
+      $httpBackend.whenPUT('/api/locations').respond(200, mocks.embeddedObject, headers);
+      $http.put('/api/locations').then((response) => {
+        response.$put('self').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should not support solo lists', (done) => {
+      $httpBackend.whenPUT('/api/locations').respond(200, mocks.soloLists, headers);
+      $http.put('/api/locations').then((response) => {
+        response.$put('self').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should not support a solo object', (done) => {
+      $httpBackend.whenPUT('/api/locations').respond(200, mocks.soloObject, headers);
+      $httpBackend.whenPUT('/api/locations/1').respond(200, mocks.soloObject, headers);
+      $http.put('/api/locations').then((response) => {
+        response.$put('self').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+  });
+
+  describe('link($patch)', () => {
+    it('should support embedded lists', (done) => {
+      $httpBackend.whenPATCH('/api/locations').respond(200, mocks.embeddedLists, headers);
+      $http.patch('/api/locations').then((response) => {
+        response.$patch('self').then((locationList) => {
+          expect(locationList).to.not.be.undefined;
+          expect(locationList.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should support an embedded object', (done) => {
+      $httpBackend.whenPATCH('/api/locations').respond(200, mocks.embeddedObject, headers);
+      $http.patch('/api/locations').then((response) => {
+        response.$patch('self').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should not support solo lists', (done) => {
+      $httpBackend.whenPATCH('/api/locations').respond(200, mocks.soloLists, headers);
+      $http.patch('/api/locations').then((response) => {
+        response.$patch('self').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should not support a solo object', (done) => {
+      $httpBackend.whenPATCH('/api/locations').respond(200, mocks.soloObject, headers);
+      $httpBackend.whenPATCH('/api/locations/1').respond(200, mocks.soloObject, headers);
+      $http.patch('/api/locations').then((response) => {
+        response.$patch('self').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+  });
+
+  describe('link($delete)', () => {
+    it('should support embedded lists', (done) => {
+      $httpBackend.whenDELETE('/api/locations').respond(200, mocks.embeddedLists, headers);
+      $http.delete('/api/locations').then((response) => {
+        response.$delete('self').then((locationList) => {
+          expect(locationList).to.not.be.undefined;
+          expect(locationList.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should support an embedded object', (done) => {
+      $httpBackend.whenDELETE('/api/locations').respond(200, mocks.embeddedObject, headers);
+      $http.delete('/api/locations').then((response) => {
+        response.$delete('self').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should not support solo lists', (done) => {
+      $httpBackend.whenDELETE('/api/locations').respond(200, mocks.soloLists, headers);
+      $http.delete('/api/locations').then((response) => {
+        response.$delete('self').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+
+    it('should not support a solo object', (done) => {
+      $httpBackend.whenDELETE('/api/locations').respond(200, mocks.soloObject, headers);
+      $httpBackend.whenDELETE('/api/locations/1').respond(200, mocks.soloObject, headers);
+      $http.delete('/api/locations').then((response) => {
+        response.$delete('self').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+  });
+
+  describe('flag(readonly)', () => {
+    it('should support an embedded object', (done) => {
+      $hateoasConfigProvider.setReadOnly(false);
+      $httpBackend.whenPOST('/api/locations').respond(200, mocks.embeddedObject, headers);
+      $http.post('/api/locations').then((response) => {
+        response.$post('self').then((location) => {
+          expect(location).to.not.be.undefined;
+          expect(location.$get).to.not.be.undefined;
+          done();
+        });
+      });
+      $httpBackend.flush();
+    });
+  });
 });

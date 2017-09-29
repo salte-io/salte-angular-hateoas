@@ -1,0 +1,7 @@
+{
+  "locationList": {
+    "locationId": 1,
+    "_links": { "self": { "href": "/api/locations/1" } }
+  },
+  "_links": { "self": { "href": "/api/locations" } }
+}

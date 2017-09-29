@@ -1,88 +1,69 @@
-export default function hateoasInterceptor($hateoasConfig, $q, $injector) {
-    const interceptor = this;
+export default class HateoasInterceptor {
+  constructor($injector, $q, $hateoasConfig) {
+    this.$injector = $injector;
+    this.$q = $q;
+    this.$hateoasConfig = $hateoasConfig;
+    this.response = this.response.bind(this);
+  }
 
-    interceptor.response = (response) => {
-        if (response.headers('Content-Type') === 'application/hal+json') {
-            return interceptor.transformHalResponse(response.data);
-        }
-        return response;
-    };
-    let $http;
+  response(response) {
+    if (response.headers('Content-Type') === 'application/hal+json') {
+      return this.transformHalResponse(response.data);
+    }
+    return response;
+  }
 
-    interceptor.transformHalResponse = (response) => {
-        if (response.length) {
-            angular.forEach(response, interceptor.transformHalResponse);
-        } else {
-            // NOTE: This delays requiring $http so that we can avoid a circular dependency
-            $http = $http || $injector.get('$http');
+  transformHalResponse(response) {
+    if (response.length) {
+      angular.forEach(response, this.transformHalResponse.bind(this));
+    } else {
+      this.$defineHiddenProperty(response, this.$hateoasConfig.getLinksKey(), response[this.$hateoasConfig.getLinksKey()]);
+      this.$defineHiddenProperty(response, '$link', (key) => {
+        const links = response[this.$hateoasConfig.getLinksKey()];
+        return links && links[key] ? this.$q.when(links[key].href) : this.$q.reject('We were unable to find a link that matched the key, ' + key);
+      });
 
-            defineHiddenProperty(response, $hateoasConfig.getLinksKey(), response[$hateoasConfig.getLinksKey()]);
-            defineHiddenProperty(response, '$link', (key) => {
-                const links = response[$hateoasConfig.getLinksKey()];
-                return links && links[key] ? $q.when(links[key].href) : $q.reject('We were unable to find a link that matched the key, ' + key);
-            });
+      this.$defineHiddenProperty(response, this.$hateoasConfig.getEmbeddedKey(), response[this.$hateoasConfig.getEmbeddedKey()]);
+      this.$defineHiddenProperty(response, '$embedded', (key) => {
+        const embedded = response[this.$hateoasConfig.getEmbeddedKey()];
+        return embedded && embedded[key] ? this.$q.when(this.transformHalResponse(embedded[key])) : this.$q.reject('We were unable to find an embedded value that matched the key, ' + key);
+      });
 
-            defineHiddenProperty(response, $hateoasConfig.getEmbeddedKey(), response[$hateoasConfig.getEmbeddedKey()]);
-            defineHiddenProperty(response, '$embedded', (key) => {
-                const embedded = response[$hateoasConfig.getEmbeddedKey()];
-                return embedded && embedded[key] ? $q.when(interceptor.transformHalResponse(embedded[key])) : $q.reject('We were unable to find an embedded value that matched the key, ' + key);
-            });
-
-            defineHiddenProperty(response, '$get', (key, config) => {
-                return response.$link(key).then((link) => {
-                    return $http.get(link, config);
-                }).catch(() => {
-                    return $q.reject('We were unable to find a link that matches the key, ' + key);
-                });
-            });
-
-            defineHiddenProperty(response, '$post', (key, data, config) => {
-                return response.$link(key).then((link) => {
-                    return $http.post(link, data, config);
-                });
-            });
-
-            defineHiddenProperty(response, '$put', (key, data, config) => {
-                return response.$link(key).then((link) => {
-                    return $http.put(link, data, config);
-                });
-            });
-
-            defineHiddenProperty(response, '$patch', (key, data, config) => {
-                return response.$link(key).then((link) => {
-                    return $http.patch(link, data, config);
-                });
-            });
-
-            defineHiddenProperty(response, '$delete', (key, config) => {
-                return response.$link(key).then((link) => {
-                    return $http.delete(link, config);
-                });
-            });
-
-            if ($hateoasConfig.getReadOnly()) {
-                angular.forEach(response, (value, key) => {
-                    defineProperty(response, key, value);
-                });
-            }
-        }
-
-        return response;
-    };
-
-    function defineProperty(object, name, value) {
-        Object.defineProperty(object, name, {
-            writable: $hateoasConfig.getReadOnly(),
-            value: value
+      // NOTE: This delays requiring $http so that we can avoid a circular dependency
+      this.$http = this.$http || this.$injector.get('$http');
+      const methods = ['get', 'post', 'put', 'patch', 'delete'];
+      angular.forEach(methods, (method) => {
+        this.$defineHiddenProperty(response, '$' + method, (key, config) => {
+          return response.$link(key).then((link) => {
+            return this.$http[method](link, config);
+          });
         });
+      });
+
+      if (this.$hateoasConfig.getReadOnly()) {
+        angular.forEach(response, (value, key) => {
+          this.$defineProperty(response, key, value);
+        });
+      }
     }
 
-    function defineHiddenProperty(object, name, value) {
-        Object.defineProperty(object, name, {
-            configurable: false,
-            enumerable: false,
-            value: value
-        });
-    }
+    return response;
+  }
+
+  $defineProperty(object, name, value) {
+    Object.defineProperty(object, name, {
+      writable: this.$hateoasConfig.getReadOnly(),
+      value: value
+    });
+  }
+
+  $defineHiddenProperty(object, name, value) {
+    Object.defineProperty(object, name, {
+      configurable: false,
+      enumerable: false,
+      value: value
+    });
+  }
 }
-hateoasInterceptor.$inject = ['$hateoasConfig', '$q', '$injector'];
+
+HateoasInterceptor.$inject = ['$injector', '$q', '$hateoasConfig'];

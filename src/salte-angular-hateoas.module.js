@@ -2,8 +2,8 @@ import hateoasInterceptor from './hateoas-interceptor/hateoas-interceptor.module
 import hateoasConfig from './hateoas-config/hateoas-config.module.js';
 
 const module = angular.module('salte-angular-hateoas', [
-    hateoasInterceptor,
-    hateoasConfig
+  hateoasInterceptor,
+  hateoasConfig
 ]);
 
 export default module.name;
