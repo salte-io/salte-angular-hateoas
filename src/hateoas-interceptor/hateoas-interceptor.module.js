@@ -1,5 +1,7 @@
 import hateoasInterceptor from './hateoas-interceptor.service';
 
-const module = angular.module('core.services.hateoas-interceptor', []).service('hateoasInterceptor', hateoasInterceptor);
+const module = angular.module('core.services.hateoas-interceptor', []);
+
+module.service('hateoasInterceptor', hateoasInterceptor);
 
 export default module.name;
