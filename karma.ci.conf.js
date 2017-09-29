@@ -67,7 +67,7 @@ module.exports = function(config) {
       noInfo: true
     },
 
-    reporters: ['mocha'],
+    reporters: ['mocha', 'saucelabs'],
 
     port: 9876,
 
@@ -81,15 +81,13 @@ module.exports = function(config) {
       startConnect: true
     },
 
+    customLaunchers: customLaunchers,
+    browsers: Object.keys(customLaunchers),
     captureTimeout: 0,
     browserNoActivityTimeout: 120000,
 
     singleRun: true
   };
-
-  karmaConfig.customLaunchers = customLaunchers;
-  karmaConfig.browsers = Object.keys(customLaunchers);
-  karmaConfig.reporters.push('saucelabs');
 
   config.set(karmaConfig);
 };
