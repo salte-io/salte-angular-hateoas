@@ -26,7 +26,8 @@
     "build:dev": "webpack --progress --colors -d",
     "build:prod": "webpack --progress --colors -p",
     "report-coverage": "coveralls < coverage/lcov.info",
-    "semantic-release": "semantic-release pre && yarn run build && yarn publish && semantic-release post"
+    "semantic-release": "semantic-release pre && yarn run build && yarn publish && semantic-release post",
+    "precommit": "remove-lockfiles"
   },
   "license": "MIT",
   "peerDependencies": {
@@ -45,6 +46,7 @@
     "eslint-config-google": "^0.9.1",
     "eslint-loader": "^1.6.0",
     "eslint-plugin-mocha": "^4.11.0",
+    "husky": "^0.14.3",
     "istanbul-instrumenter-loader": "^3.0.0",
     "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.2.0",
@@ -55,6 +57,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.1",
     "mocha": "^4.0.0",
+    "remove-lockfiles": "^2.0.0",
     "semantic-release": "^8.0.0",
     "webpack": "^3.1.0"
   },
