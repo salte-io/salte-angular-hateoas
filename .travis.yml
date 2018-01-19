@@ -10,14 +10,10 @@ branches:
   only:
     - master
     - /^greenkeeper/.*$/
-before_install:
-  - yarn global add greenkeeper-lockfile@1
-before_script: greenkeeper-lockfile-update
 script:
   - yarn run lint
   - yarn run test:sauce
   - yarn run test
-after_script: greenkeeper-lockfile-upload
 after_success:
   - yarn run report-coverage
   - yarn run semantic-release
