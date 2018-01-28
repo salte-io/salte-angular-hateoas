@@ -11,12 +11,12 @@ branches:
     - master
     - /^greenkeeper/.*$/
 script:
-  - yarn run lint
-  - yarn run test:sauce
-  - yarn run test
+  - yarn start lint
+  - yarn start test.sauce
+  - yarn start test
 after_success:
-  - yarn run report-coverage
-  - yarn run semantic-release
+  - yarn start report-coverage
+  - yarn start semantic-release
 notifications:
   email: change
 addons:
