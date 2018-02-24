@@ -12,7 +12,7 @@ branches:
     - /^greenkeeper/.*$/
 script:
   - yarn start lint
-  - yarn start test.sauce
+  - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then yarn start test.sauce; fi
   - yarn start test
 after_success:
   - yarn start report-coverage
