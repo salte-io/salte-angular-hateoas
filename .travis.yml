@@ -12,13 +12,10 @@ branches:
     - /^greenkeeper/.*$/
 script:
   - yarn start lint
-  - yarn start test.sauce
+  - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then yarn start test.sauce; fi
   - yarn start test
 after_success:
   - yarn start report-coverage
   - yarn start semantic-release
 notifications:
   email: change
-addons:
-  jwt:
-    secure: MAyHXWtIcIhe6L1vRsUjy1ZVUjmbW2AnQwtXnFqaAuLUx/Titi/dAy7sI+MAkYLkNuPsvfxVOIDe/QvQUlpjc41C8IIGeouOcPI9mziPhjwMN/ZjtKXE9UUwSnIlsTShIhZslgiz8gjkqkctdXvb4pSHY1wFIP5O51Zv1n3jx1UJJKpPP8QsHGwF8gB22DHvIGF4op0fUgFPOr4fCrlfjleM6dRQBryBjFwLsU5HtUqUjPD+95GJRmP/YDvz9TYEKHtxolxu4+LG6dTsKemsjv7fWZBjivXwtUOSTqp0nP6l8JTm579/kEjv7Pb6EIMyR/rRqlDPL+wSYB7gxgpXwkohQ1pjUtYNKs+LsGGQQuAgkgnvEvKKA9z3xcwu2MYP30Ip3TWmDErhO12RiAYUPIzHlYOYQIhtJ6InYuHcb0EOuTmKKyZTG041G0fqWFx/Qd9YDU3N7DMaYO9b3md6wS1UBOWZXy4aA5cM0HLn1fbN7GdPvucvwn9YJRYmHDUyvYeD9gAHCX0Gl/38SwZ9KE+oQZBgXNuAeTDMvvlQsjvKopC7gQMTRbTYDrLOp5DFkaS0tBySdeDHnNL8CsSLEh5iHrAa7BNm0FhUVgh4kqJF82Qv8Muh0LkuTKPssXXoxBi/fpY/VuJYLtS3mdLYHVXE7zkHRS/kzFGYiPOcnpg=
