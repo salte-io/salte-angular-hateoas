@@ -28,22 +28,22 @@ module.exports = function(config) {
     webpack: webpackConfig,
 
     webpackMiddleware: {
-      noInfo: true
+      noInfo: true,
+      stats: 'errors-only'
     },
 
     reporters: ['mocha', 'coverage'],
 
     coverageReporter: {
       dir: 'coverage',
-      reporters: [{
-          type: 'text'
-        },
-        {
-          type: 'lcovonly',
-          subdir: '.',
-          file: 'lcov.info'
-        }
+      reporters: [
+        { type: 'text' },
+        { type: 'lcovonly', subdir: '.', file: 'lcov.info' }
       ]
+    },
+
+    mochaReporter: {
+      showDiff: true
     },
 
     port: 9876,
