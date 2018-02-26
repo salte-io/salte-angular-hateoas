@@ -2,6 +2,11 @@ const webpackConfig = require('./webpack.test.config.js');
 
 module.exports = function(config) {
   const customLaunchers = {
+    ChromeBeta: {
+      base: 'SauceLabs',
+      browserName: 'chrome',
+      version: 'beta'
+    },
     Chrome: {
       base: 'SauceLabs',
       browserName: 'chrome'
@@ -67,10 +72,15 @@ module.exports = function(config) {
     webpack: webpackConfig,
 
     webpackMiddleware: {
-      noInfo: true
+      noInfo: true,
+      stats: 'errors-only'
     },
 
     reporters: ['mocha', 'saucelabs'],
+
+    mochaReporter: {
+      showDiff: true
+    },
 
     port: 9876,
 
