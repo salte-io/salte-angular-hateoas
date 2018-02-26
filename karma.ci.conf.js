@@ -2,6 +2,11 @@ const webpackConfig = require('./webpack.test.config.js');
 
 module.exports = function(config) {
   const customLaunchers = {
+    ChromeBeta: {
+      base: 'SauceLabs',
+      browserName: 'chrome',
+      version: 'beta'
+    },
     Chrome: {
       base: 'SauceLabs',
       browserName: 'chrome'
@@ -38,12 +43,15 @@ module.exports = function(config) {
       base: 'SauceLabs',
       browserName: 'safari',
       version: '8'
-    },
-    Safari7: {
-      base: 'SauceLabs',
-      browserName: 'safari',
-      version: '7'
     }
+    // TODO: For some reason Safari 7 gets fails to load
+    // the test page, every other browser seems to work fine.
+    // Safari7: {
+    //   base: 'SauceLabs',
+    //   browserName: 'safari',
+    //   platform: 'OS X 10.9',
+    //   version: '7'
+    // }
   };
 
   const karmaConfig = {
@@ -64,10 +72,15 @@ module.exports = function(config) {
     webpack: webpackConfig,
 
     webpackMiddleware: {
-      noInfo: true
+      noInfo: true,
+      stats: 'errors-only'
     },
 
     reporters: ['mocha', 'saucelabs'],
+
+    mochaReporter: {
+      showDiff: true
+    },
 
     port: 9876,
 
