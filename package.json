@@ -34,7 +34,7 @@
     "chai": "^4.1.1",
     "coveralls": "^3.0.0",
     "deindent": "^0.1.0",
-    "eslint": "^4.1.0",
+    "eslint": "^5.0.0",
     "eslint-config-google": "^0.9.1",
     "eslint-plugin-mocha": "^5.0.0",
     "husky": "^0.14.3",
