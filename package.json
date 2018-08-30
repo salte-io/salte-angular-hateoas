@@ -28,9 +28,9 @@
   "devDependencies": {
     "angular": "^1.6.0",
     "angular-mocks": "^1.5.8",
-    "babel-core": "^6.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
     "babel-loader": "^8.0.0",
-    "babel-preset-env": "^1.0.0",
     "chai": "^4.1.1",
     "coveralls": "^3.0.0",
     "deindent": "^0.1.0",
