@@ -19,7 +19,7 @@
   "scripts": {
     "start": "nps",
     "prepublishOnly": "yarn start build",
-    "precommit": "remove-lockfiles"
+    "pre-commit": "remove-lockfiles"
   },
   "license": "MIT",
   "peerDependencies": {
@@ -37,7 +37,7 @@
     "eslint": "^5.0.0",
     "eslint-config-google": "^0.9.1",
     "eslint-plugin-mocha": "^5.0.0",
-    "husky": "^0.14.3",
+    "husky": "^1.0.0",
     "istanbul-instrumenter-loader": "^3.0.0",
     "karma": "^3.0.0",
     "karma-chrome-launcher": "^2.2.0",
