@@ -1,3 +1,4 @@
+import angular from 'angular';
 import hateoasInterceptor from './hateoas-interceptor.service';
 
 const module = angular.module('core.services.hateoas-interceptor', []);
