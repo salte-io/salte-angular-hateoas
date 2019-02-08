@@ -1,4 +1,6 @@
-extends: google
+extends: eslint:recommended
+env:
+  node: true
 parserOptions:
   sourceType: module
 rules:

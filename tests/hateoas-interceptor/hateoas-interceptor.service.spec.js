@@ -1,3 +1,4 @@
+import angular from 'angular';
 import { expect } from 'chai';
 
 import mocks from '../mocks/mocks.js';

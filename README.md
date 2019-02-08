@@ -167,8 +167,8 @@ THE SOFTWARE.
 [npm-downloads-image]: http://img.shields.io/npm/dm/salte-angular-hateoas.svg?style=flat
 [npm-url]: https://npmjs.org/package/salte-angular-hateoas
 
-[travis-ci-image]: https://img.shields.io/travis/salte-io/salte-angular-hateoas/master.svg?style=flat
-[travis-ci-url]: https://travis-ci.org/salte-io/salte-angular-hateoas
+[travis-ci-image]: https://img.shields.io/travis/com/salte-io/salte-angular-hateoas/master.svg?style=flat
+[travis-ci-url]: https://travis-ci.com/salte-io/salte-angular-hateoas
 
 [coveralls-image]: https://img.shields.io/coveralls/salte-io/salte-angular-hateoas/master.svg
 [coveralls-url]: https://coveralls.io/github/salte-io/salte-angular-hateoas
