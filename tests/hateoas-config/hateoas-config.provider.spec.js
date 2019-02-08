@@ -1,3 +1,4 @@
+import angular from 'angular';
 import hateoasConfig from '../../src/hateoas-config/hateoas-config.module.js';
 import { expect } from 'chai';
 

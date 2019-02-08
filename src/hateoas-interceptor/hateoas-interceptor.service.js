@@ -1,3 +1,5 @@
+import angular from 'angular';
+
 export default class HateoasInterceptor {
   constructor($injector, $q, $hateoasConfig) {
     this.$injector = $injector;
