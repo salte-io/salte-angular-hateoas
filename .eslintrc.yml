@@ -2,6 +2,7 @@ extends: eslint:recommended
 env:
   node: true
 parserOptions:
+  ecmaVersion: 2015
   sourceType: module
 rules:
   comma-dangle:
