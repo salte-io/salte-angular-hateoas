@@ -45,7 +45,7 @@
     "karma-sauce-launcher": "^2.0.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^4.0.2",
-    "mocha": "^6.0.0",
+    "mocha": "^7.0.1",
     "nps": "^5.0.0",
     "remove-lockfiles": "^2.0.0",
     "semantic-release": "^16.0.0",
