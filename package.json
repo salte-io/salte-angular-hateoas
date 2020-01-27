@@ -48,7 +48,7 @@
     "mocha": "^7.0.1",
     "nps": "^5.0.0",
     "remove-lockfiles": "^2.0.0",
-    "semantic-release": "^16.0.0",
+    "semantic-release": "^17.0.0",
     "webpack": "^4.29.4",
     "webpack-cli": "^3.2.3"
   },
