@@ -4,7 +4,7 @@
   "description": "The simple way to consume HATEOAS enabled REST APIs with AngularJS",
   "main": "dist/salte-angular-hateoas.min.js",
   "contributors": [
-    "Nick Woodward <nick@salte.io>"
+    "Cecilia Woodward <ceci@salte.io>"
   ],
   "keywords": [
     "angular",
