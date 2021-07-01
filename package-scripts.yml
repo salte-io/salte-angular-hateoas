@@ -9,9 +9,9 @@ scripts:
     tdd:
       script: karma start
       description: Watches for changes and executes the Test Suite accordingly
-    sauce:
+    ci:
       script: karma start karma.ci.conf.js
-      description: Executes the Test Suite on Sauce Labs
+      description: Executes the Test Suite on BrowserStack
   serve:
     script: webpack-dev-server --config webpack.server.config.js
     description: Starts a server at http://localhost:8080
@@ -20,10 +20,10 @@ scripts:
       script: nps build.dev && nps build.prod
       description: Builds both a minified and unminified artifact
     dev:
-      script: webpack --progress --colors --mode development
+      script: webpack --progress --mode development
       description: Builds an unminified artifact
     prod:
-      script: webpack --progress --colors --mode production
+      script: webpack --progress --mode production
       description: Builds a minified artifact
   report-coverage:
     script: coveralls < coverage/lcov.info

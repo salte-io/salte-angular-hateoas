@@ -2,64 +2,21 @@ const webpackConfig = require('./webpack.test.config.js');
 
 module.exports = function(config) {
   const customLaunchers = {
-    ChromeBeta: {
-      base: 'SauceLabs',
-      browserName: 'chrome',
-      version: 'beta'
-    },
-    Chrome: {
-      base: 'SauceLabs',
-      browserName: 'chrome'
-    },
-    Firefox: {
-      base: 'SauceLabs',
-      browserName: 'firefox'
-    },
-    Edge: {
-      base: 'SauceLabs',
-      browserName: 'microsoftedge'
-    },
     InternetExplorer11: {
-      base: 'SauceLabs',
-      browserName: 'internet explorer',
-      version: '11'
-    },
-    InternetExplorer10: {
-      base: 'SauceLabs',
-      browserName: 'internet explorer',
-      version: '10'
-    },
-    // TODO: Enable this once https://github.com/karma-runner/karma/issues/3198 is resolved
-    // Safari10: {
-    //   base: 'SauceLabs',
-    //   browserName: 'safari',
-    //   version: '10'
-    // },
-    Safari9: {
-      base: 'SauceLabs',
-      browserName: 'safari',
-      version: '9'
-    },
-    Safari8: {
-      base: 'SauceLabs',
-      browserName: 'safari',
-      version: '8'
+      base: 'BrowserStack',
+      browser: 'IE',
+      browser_version: '11',
+      os: 'Windows',
+      os_version: '10'
     }
-    // TODO: For some reason Safari 7 gets fails to load
-    // the test page, every other browser seems to work fine.
-    // Safari7: {
-    //   base: 'SauceLabs',
-    //   browserName: 'safari',
-    //   platform: 'OS X 10.9',
-    //   version: '7'
-    // }
   };
 
   const karmaConfig = {
     basePath: '',
 
     frameworks: [
-      'mocha'
+      'mocha',
+      'webpack'
     ],
 
     files: [
@@ -77,7 +34,7 @@ module.exports = function(config) {
       stats: 'errors-only'
     },
 
-    reporters: ['mocha', 'saucelabs'],
+    reporters: ['mocha', 'BrowserStack'],
 
     mochaReporter: {
       showDiff: true
@@ -88,12 +45,6 @@ module.exports = function(config) {
     colors: true,
 
     logLevel: config.LOG_INFO,
-
-    sauceLabs: {
-      testName: 'salte-io/salte-angular-hateoas',
-      tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
-      startConnect: true
-    },
 
     customLaunchers: customLaunchers,
     browsers: Object.keys(customLaunchers),
