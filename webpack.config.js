@@ -39,7 +39,7 @@ module.exports = {
         /**
          * ${packageJson.name} JavaScript Library v${packageJson.version}
          *
-         * @license MIT (https://github.com/salte-io/salte-angular-hateoas/blob/master/LICENSE)
+         * @license MIT (https://github.com/salte-io/salte-angular-hateoas/blob/main/LICENSE)
          *
          * Made with ♥ by ${packageJson.contributors.join(', ')}
          */
